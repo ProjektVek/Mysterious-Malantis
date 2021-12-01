@@ -1,7 +1,6 @@
 class_name Player
 extends Actor
 
-export(Vector2) var player_position
 
 # warning-ignore:unused_signal
 signal collect_coin()
@@ -64,8 +63,6 @@ func _physics_process(_delta):
 	_velocity = move_and_slide_with_snap(
 		_velocity, snap_vector, FLOOR_NORMAL, not is_on_platform, 4, 0.9, false
 	)
-	
-	player_position = get_global_position()
 
 	# When the character’s direction changes, we want to to scale the Sprite accordingly to flip it.
 	# This will make Robi face left or right depending on the direction you move.
@@ -81,9 +78,8 @@ func _physics_process(_delta):
 	# creating new variables.
 	var is_shooting = false
 	if Input.is_action_just_pressed("shoot" + action_suffix):
-		var mouse_position = get_global_mouse_position() # Getting Cursor Position
-		# var angle = mouse_postion.angle_to_point(Gun.global_position)
-		is_shooting = gun.shoot(sprite.scale.x, mouse_position)
+		is_shooting = gun.shoot(sprite.scale.x)
+
 	var animation = get_new_animation(is_shooting)
 	if animation != animation_player.current_animation and shoot_timer.is_stopped():
 		if is_shooting:

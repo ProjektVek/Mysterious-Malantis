@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/art/player/bullet/bullet.png" type="Texture" id=1]
 [ext_resource path="res://src/Objects/Bullet.gd" type="Script" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
+
+[sub_resource type="PhysicsMaterial" id=7]
 
 [sub_resource type="CanvasItemMaterial" id=4]
 
@@ -41,9 +43,10 @@ tracks/1/keys = {
 
 [node name="Bullet" type="RigidBody2D"]
 material = SubResource( 1 )
-collision_layer = 0
-collision_mask = 26
-gravity_scale = 0.0
+collision_layer = 2
+collision_mask = 2
+mass = 0.000111111
+physics_material_override = SubResource( 7 )
 continuous_cd = 2
 contacts_reported = 1
 contact_monitor = true
