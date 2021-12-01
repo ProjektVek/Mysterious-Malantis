@@ -68,9 +68,9 @@ func _physics_process(_delta):
 	# This will make Robi face left or right depending on the direction you move.
 	if direction.x != 0:
 		if direction.x > 0:
-			sprite.scale.x = 1
-		else:
 			sprite.scale.x = -1
+		else:
+			sprite.scale.x = 1
 
 	# We use the sprite's scale to store Robi’s look direction which allows us to shoot
 	# bullets forward.
@@ -78,8 +78,9 @@ func _physics_process(_delta):
 	# creating new variables.
 	var is_shooting = false
 	if Input.is_action_just_pressed("shoot" + action_suffix):
-		is_shooting = gun.shoot(sprite.scale.x)
-
+		var mouse_position = get_global_mouse_position() # Getting Cursor Position
+		# var angle = mouse_postion.angle_to_point(Gun.global_position)
+		is_shooting = gun.shoot(sprite.scale.x, mouse_position)
 	var animation = get_new_animation(is_shooting)
 	if animation != animation_player.current_animation and shoot_timer.is_stopped():
 		if is_shooting:
